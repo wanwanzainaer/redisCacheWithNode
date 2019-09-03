@@ -46,6 +46,8 @@ describe("when logged in,", async () => {
     });
 
     test("Submitting takes user to review screen", async () => {
+      await page.waitFor("h5");
+
       const text = await page.getContentsOf("h5");
       expect(text).toEqual("Please confirm your entries");
     });
