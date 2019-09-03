@@ -21,10 +21,9 @@ install_dependencies:
 testing:
   stage: test
   variables:
-    NODE_ENV: ci
+    NODE_ENV: gitlabci
     PORT: 3000
   script:
     - nohup npm run start &
     - sleep 3
-    - netstat -plnt
     - npm test
