@@ -15,23 +15,23 @@ afterEach(async () => {
 describe("when logged in,", async () => {
   beforeEach(async () => {
     await page.login();
-    await page.waitFor("a.btn-floating");
+    await page.waitForSelector("a.btn-floating");
     await page.click("a.btn-floating");
   });
 
   test("can see blog create form", async () => {
-    await page.waitFor("form label");
+    await page.waitForSelector("form label");
     const label = await page.getContentsOf("form label");
     expect(label).toEqual("Blog Title");
   });
 
   describe("and using invalid inputs", async () => {
     beforeEach(async () => {
-      await page.waitFor("form button");
+      await page.waitForSelector("form button");
       await page.click("form button");
     });
     test("the form shows an error message", async () => {
-      await page.waitFor(".title .red-text");
+      await page.waitForSelector(".title .red-text");
       const titleError = await page.getContentsOf(".title .red-text");
       const contentError = await page.getContentsOf(
         ".content .red-text"
@@ -43,22 +43,22 @@ describe("when logged in,", async () => {
 
   describe("and using valid inputs", async () => {
     beforeEach(async () => {
-      await page.waitFor(".title input");
+      await page.waitForSelector(".title input");
       await page.type(".title input", "My title");
       await page.type(".content input", "My content");
       await page.click("form button");
     });
 
     test("Submitting takes user to review screen", async () => {
-      await page.waitFor("h5");
+      await page.waitForSelector("h5");
       const text = await page.getContentsOf("h5");
       expect(text).toEqual("Please confirm your entries");
     });
 
     test("Submit then saving adds blog to index page", async () => {
-      await page.waitFor("button.green");
+      await page.waitForSelector("button.green");
       await page.click("button.green");
-      await page.waitFor(".card");
+      await page.waitForSelector(".card");
       const title = await page.getContentsOf(".card-title");
       const content = await page.getContentsOf("p");
       expect(title).toEqual("My title");
