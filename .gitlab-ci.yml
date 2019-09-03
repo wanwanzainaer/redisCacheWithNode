@@ -1,0 +1,23 @@
+image: node:8
+stages:
+  - build
+  - test
+cache:
+  paths:
+    - node_modules/
+    - client/node_modules
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - node_modules/
+      - client/node_modules
+testing:
+  stage: test
+  script:
+    - nohup npm run start &
+    - sleep 3
+    - npm test
