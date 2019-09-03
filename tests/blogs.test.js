@@ -15,19 +15,23 @@ afterEach(async () => {
 describe("when logged in,", async () => {
   beforeEach(async () => {
     await page.login();
+    await page.waitFor("a.btn-floating");
     await page.click("a.btn-floating");
   });
 
   test("can see blog create form", async () => {
+    await page.waitFor();
     const label = await page.getContentsOf("form label");
     expect(label).toEqual("Blog Title");
   });
 
   describe("and using invalid inputs", async () => {
     beforeEach(async () => {
+      await page.waitFor("form button");
       await page.click("form button");
     });
     test("the form shows an error message", async () => {
+      await page.waitFor(".title .red-text");
       const titleError = await page.getContentsOf(".title .red-text");
       const contentError = await page.getContentsOf(
         ".content .red-text"
@@ -47,7 +51,6 @@ describe("when logged in,", async () => {
 
     test("Submitting takes user to review screen", async () => {
       await page.waitFor("h5");
-
       const text = await page.getContentsOf("h5");
       expect(text).toEqual("Please confirm your entries");
     });
