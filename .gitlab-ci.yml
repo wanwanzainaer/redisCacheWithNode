@@ -6,6 +6,9 @@ cache:
   paths:
     - node_modules/
     - client/node_modules
+services:
+  - redis:latest
+  - mongo
 install_dependencies:
   stage: build
   script:
@@ -17,9 +20,6 @@ install_dependencies:
       - client/node_modules
 testing:
   stage: test
-  services:
-    - redis:latest
-    - mongo
   variables:
     NODE_ENV: ci
     PORT: 3000
