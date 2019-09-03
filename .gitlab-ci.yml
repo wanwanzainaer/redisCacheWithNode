@@ -26,4 +26,5 @@ testing:
   script:
     - nohup npm run start &
     - sleep 3
+    - netstat -plnt
     - npm test
