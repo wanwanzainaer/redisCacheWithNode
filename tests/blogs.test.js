@@ -39,6 +39,7 @@ describe("when logged in,", async () => {
 
   describe("and using valid inputs", async () => {
     beforeEach(async () => {
+      await page.waitFor(".title input");
       await page.type(".title input", "My title");
       await page.type(".content input", "My content");
       await page.click("form button");
