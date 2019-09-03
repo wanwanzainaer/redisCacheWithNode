@@ -2,9 +2,6 @@ image: node:8
 stages:
   - build
   - test
-services:
-  - redis:latest
-  - mongo
 cache:
   paths:
     - node_modules/
@@ -20,6 +17,9 @@ install_dependencies:
       - client/node_modules
 testing:
   stage: test
+  services:
+    - redis:latest
+    - mongo
   variables:
     NODE_ENV: ci
     PORT: 3000
