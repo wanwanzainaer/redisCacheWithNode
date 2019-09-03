@@ -17,6 +17,9 @@ install_dependencies:
       - client/node_modules
 testing:
   stage: test
+  environment:
+    - NODE_ENV=ci
+    - PORT=3000
   script:
     - nohup npm run start &
     - sleep 3
