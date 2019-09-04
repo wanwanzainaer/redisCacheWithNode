@@ -30,7 +30,7 @@ class Page {
     await this.page.setCookie({ name: "session", value: session });
     await this.page.setCookie({ name: "session.sig", value: sig });
     await this.page.goto("http://localhost:3000/blogs", {
-      waitUntil: "networkidle0"
+      waitUntil: "domcontentloaded"
     });
   }
 
